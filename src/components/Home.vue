@@ -22,7 +22,7 @@
         <Button text='Search' button-class='main-button' @click="() => searchLanguage(searchText)"/>
       </div>
     </div>
-    <ResultsPage :job-data="jobData" :language="searchText" />
+    <ResultsPage :job-data="jobData" :language="language" :loading="loading"/>
   </div>
 </template>
 
@@ -39,23 +39,28 @@ export default {
     return {
       languages: ['React', 'Ruby', 'Python', 'Java', 'PHP'],
       searchText: "",
+      language: "",
       jobData: {},
-
+      loading: false
     }
-  },
-  created() {
-    console.log("baseurl:", import.meta.env.VITE_API_URL)
   },
   methods: {
     async searchLanguage(language) {
+      this.language = language
+      this.searchText = ""
+      this.jobData = {}
+      this.loading = true
       try {
         const response = await fetch(`${import.meta.env.VITE_API_URL}jobs?language=${language}`)
         if (!response.ok) {
+          this.loading = false
           throw new Error(`error! ${response.status}`)
         }
         this.jobData = await response.json()
+        this.loading = false
       } catch(error) {
         console.log(error)
+        this.loading = false
       }
     }
   }

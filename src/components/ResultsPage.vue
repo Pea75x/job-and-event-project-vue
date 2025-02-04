@@ -13,7 +13,8 @@
     </div>
   </div>
   <div class="results-container">
-    <h1 class='title'>Jobs</h1>
+    <div v-if="!!loading" class="loading">Searching for jobs...</div>
+    <h1 class='title' v-if="Object.keys(jobData).length > 0">Jobs</h1>
     <div v-for="job, index in jobData.jobs" :key="index" class='job-container' :class="index < jobData.jobs.length - 1 && 'border-bottom'">
       <h1 class='job-title'><a :href="job.link" target="_blank">{{job['job-title']}}</a></h1>
       <h2 class='company-title'>{{job.company}}</h2>
@@ -38,12 +39,7 @@
 
 <script>
   export default {
-    props: ['jobData', 'language'],
-    components: {
-    },
-    created() {
-      console.log(this.language.length)
-    }
+    props: ['jobData', 'language', 'loading']
   }
 </script>
 
@@ -54,6 +50,7 @@
     margin: auto;
     border-radius: 20px 20px 0 0;
     min-height: calc(100vh - 315px);
+    position: relative;
   }
 
   @media (max-width: 900px) {
@@ -136,5 +133,21 @@
     position: relative;
     margin-bottom: 20px;
   }
-
+  .loading {
+  position: absolute;
+  top: 20%;
+  width: 100%;
+  animation-name: loading-spinner;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate-reverse;
+}
+@keyframes loading-spinner {
+  from {
+    font-weight:900;
+  }
+  to {
+    font-weight: 400;
+    }
+}
 </style>
