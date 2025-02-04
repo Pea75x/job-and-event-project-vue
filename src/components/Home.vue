@@ -8,7 +8,7 @@
     <div class='language-button-container'>
       <Button 
         v-for="language in languages"
-        @click-button="pickLanguage"
+        @click-button="searchLanguage"
         :key="language"
         button-class='rounded-button'
         :text="language"
@@ -16,13 +16,13 @@
     </div>
     <div class="search-container">
       <div class='search-boxes'>
-        <input :v-model="searchText" type='text' class='search-input' placeholder='Search language/framework...'/>
+        <input v-model="searchText" type='text' class='search-input' placeholder='Search language/framework...'/>
       </div>
       <div class='search-boxes'>
-        <Button text='Search' button-class='main-button' @click="pickLanguage"/>
+        <Button text='Search' button-class='main-button' @click="() => searchLanguage(searchText)"/>
       </div>
     </div>
-    <ResultsPage/>
+    <ResultsPage :job-data="jobData" :language="language" :loading="loading"/>
   </div>
 </template>
 
@@ -38,17 +38,31 @@ export default {
   data() {
     return {
       languages: ['React', 'Ruby', 'Python', 'Java', 'PHP'],
-      searchText: ""
+      searchText: "",
+      language: "",
+      jobData: {},
+      loading: false
     }
   },
-  created() {
-    
-  },
   methods: {
-    pickLanguage(language) {
-      console.log(language)
-    },
-
+    async searchLanguage(language) {
+      this.language = language
+      this.searchText = ""
+      this.jobData = {}
+      this.loading = true
+      try {
+        const response = await fetch(`${import.meta.env.VITE_API_URL}jobs?language=${language}`)
+        if (!response.ok) {
+          this.loading = false
+          throw new Error(`error! ${response.status}`)
+        }
+        this.jobData = await response.json()
+        this.loading = false
+      } catch(error) {
+        console.log(error)
+        this.loading = false
+      }
+    }
   }
 }
 </script>

@@ -1,41 +1,22 @@
-# job-scraper
+# Jobhunter
 
-This template should help get you started developing with Vue 3 in Vite.
+### Technologies used
 
-## Recommended IDE Setup
+- Vue.js
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+The aim of this project is to search for available jobs in London based on your chosen programing language/framework. It includes a pie chart of the most popular skills needed from all of the roles, to give you an idea of what skills would be useful to learn or of upcoming trends.
 
-## Customize configuration
+I was able to collect this data by webscraping using Beautiful Soup and Django. Please have a look at my [backend repo](https://github.com/Pea75x/job-and-event-project) for details 
 
-See [Vite Configuration Reference](https://vite.dev/config/).
+<img src="./public/readme-preview.jpg" alt='frontend' width="500" />
 
-## Project Setup
-
-```sh
-npm install
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
-npm run dev
-```
-
-### Compile and Minify for Production
-
-```sh
-npm run build
-```
-
-### Run Unit Tests with [Vitest](https://vitest.dev/)
+<!-- ### Run Unit Tests with [Vitest](https://vitest.dev/)
 
 ```sh
 npm run test:unit
 ```
 
 ### Run End-to-End Tests with [Playwright](https://playwright.dev)
-
 ```sh
 # Install browsers for the first run
 npx playwright install
@@ -51,4 +32,4 @@ npm run test:e2e -- --project=chromium
 npm run test:e2e -- tests/example.spec.ts
 # Runs the tests in debug mode
 npm run test:e2e -- --debug
-```
+``` -->
