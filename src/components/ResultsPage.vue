@@ -1,20 +1,20 @@
 <template>
-  <div class='pie-container'>
-    <h1 class='title'>Ruby on Rails</h1>
+  <div class='pie-container' v-if="Object.keys(jobData).length > 0">
+    <h1 class='title'>{{language}}</h1>
     <div class='insights-container'>
       <div class='insight'>
-        <img :src="`data:image/png;base64,${jobDetails['general_skills']}`" width="400"/>
+        <img :src="`data:image/png;base64,${jobData['general_skills']}`" width="400"/>
         <p class='pie-text'>In demand general skills</p>
       </div>
       <div class='insight'>
-        <img :src="`data:image/png;base64,${jobDetails['technical_skills']}`" width="400"/>
+        <img :src="`data:image/png;base64,${jobData['technical_skills']}`" width="400"/>
         <p class='pie-text'>In demand technical skills</p>
       </div>
     </div>
   </div>
   <div class="results-container">
     <h1 class='title'>Jobs</h1>
-    <div v-for="job, index in jobDetails.jobs" :key="index" class='job-container' :class="index < jobDetails.jobs.length - 1 && 'border-bottom'">
+    <div v-for="job, index in jobData.jobs" :key="index" class='job-container' :class="index < jobData.jobs.length - 1 && 'border-bottom'">
       <h1 class='job-title'><a :href="job.link" target="_blank">{{job['job-title']}}</a></h1>
       <h2 class='company-title'>{{job.company}}</h2>
       <h3 class='level'>Level: {{job.level}}</h3>
@@ -37,24 +37,17 @@
 </template>
 
 <script>
-import jobData from '../data/api_data.json'
-
   export default {
     props: ['jobData', 'language'],
     components: {
     },
-    data() {
-      return {
-        jobDetails: jobData
-      }
+    created() {
+      console.log(this.language.length)
     }
   }
 </script>
 
 <style>
-  /* * {
-    text-align: left;
-  } */
   .results-container {
     width: 90%;
     background-color: #cce2cc;

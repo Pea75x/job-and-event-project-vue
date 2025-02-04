@@ -11,6 +11,7 @@
     "test:e2e": "playwright test"
   },
   "dependencies": {
+    "dotenv": "^16.4.7",
     "vue": "^3.5.13"
   },
   "devDependencies": {
