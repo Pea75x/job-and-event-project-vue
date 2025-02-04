@@ -134,13 +134,13 @@
     margin-bottom: 20px;
   }
   .loading {
-  position: absolute;
-  top: 20%;
-  width: 100%;
-  animation-name: loading-spinner;
-  animation-duration: 2s;
-  animation-iteration-count: infinite;
-  animation-direction: alternate-reverse;
+    position: absolute;
+    top: 20%;
+    width: 100%;
+    animation-name: loading-spinner;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate-reverse;
 }
 @keyframes loading-spinner {
   from {
